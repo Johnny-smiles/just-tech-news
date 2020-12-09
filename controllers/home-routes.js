@@ -4,7 +4,9 @@ const sequelize = require('../config/connection');
 // linking models
 const { Post, User, Comment } = require('../models');
 
+// linking models
 router.get('/', (req, res) => {
+  console.log(req.sessions);
     Post.findAll({
       attributes: [
         'id',
@@ -40,5 +42,15 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
       });
   });
+// linking login template
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
+
 
 module.exports = router;
