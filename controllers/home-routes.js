@@ -49,7 +49,10 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('homepage', {
+    posts,
+    loggedIn: req.session.loggedIn
+  });
 });
 
 //linking single post template
@@ -90,7 +93,10 @@ router.get('/post/:id', (req, res) => {
       const post = dbPostData.get({ plain: true });
 
       // pass data to template
-      res.render('single-post', { post });
+      res.render('single-post', {
+        post,
+        loggedIn: req.session.loggedIn
+       });
     })
     .catch(err => {
       console.log(err);
