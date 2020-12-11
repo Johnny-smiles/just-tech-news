@@ -8,13 +8,15 @@ const sequelize = require('./config/connection');
 const path = require('path');
 //linking express
 const app = express();
+// linking helpers 
+const helpers = require('./utils/helpers');
 
 //establising a port
 const PORT = process.env.PORT || 3001;
 
 //setting handlebars.js as default template 
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+const hbs = exphbs.create({helpers});
 // linking handlebars.js to express()
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
